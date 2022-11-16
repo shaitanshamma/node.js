@@ -15,6 +15,9 @@ function checkRange(start, end) {
 
 
 function printPrimeNumbers(start, end) {
+    if(start===1){
+        start=2;
+    }
     next:
         for (let i = start; i <= end; i++) {
             for (let j = start; j < i; j++) {
@@ -25,27 +28,12 @@ function printPrimeNumbers(start, end) {
     printPrime(primeList)
 }
 
-function coloredLog(number, count) {
-    switch (count) {
-        case 1: {
-            console.log(colors.green(number));
-            break
-        }
-        case 2: {
-            console.log(colors.yellow(number));
-            break
-        }
-        case 3: {
-            console.log(colors.red(number));
-            break
-        }
-    }
-}
-
 function printPrime(list) {
     if (list.length > 0) {
-        for (let i = 0; i < list.length && i < 3; i++) {
-            coloredLog(list[i], i + 1)
+        for (let i = 0; i < list.length; i = i + 3) {
+            console.log(colors.green(list[i]));
+            if(list[i+1])console.log(colors.yellow(list[i + 1]));
+            if(list[i+2])console.log(colors.red(list[i + 2]));
         }
     } else {
         console.log(colors.red('Prime numbers nof found!'))
