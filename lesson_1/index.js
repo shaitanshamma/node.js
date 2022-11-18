@@ -20,7 +20,7 @@ function printPrimeNumbers(start, end) {
     }
     next:
         for (let i = start; i <= end; i++) {
-            for (let j = start; j < i; j++) {
+            for (let j = 2; j < i; j++) {
                 if (i % j === 0) continue next;
             }
             primeList.push(i);
