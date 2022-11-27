@@ -15,15 +15,19 @@ function createLogs(cb){
     fs.mkdir(destPath, {recursive: true}, cb);
 }
 
+const streams = {}
 function parseLogs() {
     rl.on("line", line => {
         const [filename, fileContent] = line.split(" - - ");
         if (filename && fileContent) {
             const logPath = path.join(__dirname, 'logs', filename + '_requests.log')
-            const output = fs.createWriteStream(logPath, {
-                encoding: "utf8",
-                flags: "a+"
-            });
+            if (!streams[filename]) {
+                streams[filename] = fs.createWriteStream(logPath, {
+                    encoding: "utf8",
+                    flags: "a+"
+                });
+            }
+            const output = streams[filename]
             output.write(fileContent + "\n");
         }
     });
