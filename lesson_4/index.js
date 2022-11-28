@@ -25,7 +25,7 @@ fsp.readdir(__dirname, {
         message: "Choose file:",
     })
 }).then((file) => {
-    const strToSearch = process.argv.slice(2);
+    const strToSearch = process.argv.slice(2).toString();
     const input = fs.createReadStream(file.fileName, 'utf8');
     const output = fs.createWriteStream(strToSearch + '.log', 'utf8');
     const rl = readline.createInterface(input);
