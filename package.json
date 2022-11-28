@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "node lesson_1/index.js",
+    "dev": "node lesson_4/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,12 @@
   },
   "homepage": "https://github.com/shaitanshamma/node.js#readme",
   "dependencies": {
-    "colors": "^1.4.0"
+    "colors": "^1.4.0",
+    "inquirer": "^9.1.4",
+    "inquirer-file-tree-selection-prompt": "^2.0.5",
+    "yargs": "^17.6.2"
+  },
+  "bin": {
+    "reader": "lesson_4/index.js"
   }
 }
