@@ -1,0 +1,37 @@
+<html>
+<head>
+        <title>Messanger</title>
+        <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+                integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
+                crossorigin="anonymous"></script>
+    <title>Messenger</title>
+</head>
+<body>
+<h1>Messenger</h1>
+<label for="nick">Nick name</label><input type="text" id="nick" placeholder="nick"/>
+<label for="input">Text message</label><input type="text" id="input" autofocus/>
+<input type="submit" id="send" value="Send"/>
+<div id="messages"></div>
+<script type="text/javascript">
+    const socket = io('localhost:3003')
+    socket.on('connect', () => console.log('Connection with localhost:3003 created'));
+    socket.on('server-msg', ({nick, msg}) => {
+        const paragraphElement = document.createElement('p');
+        paragraphElement.textContent = `${nick} : ${msg}`
+        document.getElementById('messages').append(paragraphElement)
+    })
+
+    document.getElementById('send')
+        .onclick = function () {
+        let nick = '';
+        document.getElementById('nick').value === '' ? nick = 'anonymous' : nick = document.getElementById('nick').value
+        socket.emit('client-msg',
+            {
+                nick: nick,
+                msg: document.getElementById('input').value
+            })
+        document.getElementById('input').value = '';
+    }
+</script>
+</body>
+</html>
